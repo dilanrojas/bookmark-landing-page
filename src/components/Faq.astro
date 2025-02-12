@@ -1,0 +1,75 @@
+---
+import Question from "./Question.astro"
+---
+
+<section class="faq wrapper">
+  <header class="faq-header">
+    <h2>Frequently Asked Questions</h2>
+    <p>
+      Here are some of our FAQs. If you have any other questions you’d like 
+      answered please feel free to email us.
+    </p>
+  </header>
+  <ul class="faq-list">
+    <li>
+      <Question
+        question="What is Bookmark?"
+        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt justo eget ultricies fringilla. Phasellus blandit ipsum quis quam ornare mattis."
+      />
+    </li>
+    <li>
+      <Question
+        question="How can I request a new browser?"
+        answer="Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet. Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdie tVivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet."
+      />
+    </li>
+    <li>
+      <Question
+        question="Is there a mobile app?"
+        answer="Sed consectetur quam id neque fermentum accumsan. Praesent luctus vestibulum dolor, ut condimentum urna vulputate eget. Cras in ligula quis est pharetra mattis sit amet pharetra purus. Sed sollicitudin ex et ultricies bibendum."
+      />
+    </li>
+    <li>
+      <Question
+        question="What about other Chromium browsers?"
+        answer="Integer condimentum ipsum id imperdiet finibus. Vivamus in placerat mi, at euismod dui. Aliquam vitae neque eget nisl gravida pellentesque non ut velit."
+      />
+    </li>
+  </ul>
+  <footer class="faq-footer">
+    <button class="button">More Info</button>
+  </footer>
+</section>
+
+<style>
+  .faq {
+    padding-block: 4rem;
+  }
+
+  .faq-header {
+    margin-inline: auto;
+    max-width: 44ch;
+    text-align: center;
+    margin-bottom: 3rem
+  }
+
+  .faq-header h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .faq-list {
+    margin-inline: auto;
+    max-width: 50ch;
+    border-top: 1px solid #DDDDDD;
+    margin-bottom: 2.5rem;
+  }
+
+  .faq-footer {
+    --accent: var(--s-blue);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

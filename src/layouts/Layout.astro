@@ -1,0 +1,173 @@
+---
+import Header from "@/components/Header.astro"
+import Footer from "@/components/Footer.astro"
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<title>Frontend Mentor | Bookmark landing page</title>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+	:root {
+		--ff-html: "Rubik", serif;
+
+		--white: hsl(0, 0%, 100%);
+		--s-blue: hsl(231, 69%, 60%);
+		--s-red: hsl(0, 94%, 66%);
+		--gsh-blue: hsl(229, 8%, 60%);
+		--vd-blue: hsl(229, 31%, 21%);
+	}
+
+	@keyframes slideOut {
+		100% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+	}
+
+	@keyframes slideIn {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+
+		100% {
+			opacity: 1;
+			transform: translateY(0px);
+		}
+	}
+
+	@keyframes fadeOut {
+		100% { opacity: 0 }
+	}
+
+	@keyframes fadeIn {
+		0% 	 { opacity: 0 }
+		100% { opacity: 1}
+	}
+
+	html {
+		font-family: var(--ff-html);
+		line-height: 1.6;
+		font-size: 18px;
+		color: var(--vd-blue);
+		overflow-x: hidden;
+	}
+
+	@media (width <= 768px) {
+		html {
+			font-size: 16px
+		}
+	}
+
+	body { overflow-x: hidden }
+
+	* {
+		margin: 0;
+		padding: 0;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	*, *::before, *::after { box-sizing: border-box }
+
+	h1, h2, h3, h4, h5, h6 {
+		line-height: 1;
+		font-weight: 500;
+	}
+
+	a:not([class]) {
+		color: currentColor;
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 1.8px;
+		transition: color .12s ease;
+
+		&:hover { color: var(--accent) }
+	}
+
+	p:not([class]) {
+		color: var(--gsh-blue)
+	}
+
+	ul, ol { list-style-type: none }
+
+  svg, picture, img { display: block }
+
+	button {
+		border: none;
+		cursor: pointer;
+		background-color: transparent;
+		font-weight: inherit;
+		font-size: inherit;
+		font-family: inherit;
+	}
+
+	input {
+		border: 0;
+		border-radius: 5px;
+		outline: 0;
+
+		&:focus {
+			outline: 0;
+			border: 0
+		}
+	}
+
+	/* Utility classes */
+	.wrapper {
+		--width: 1090px;
+		--padding: 1.7rem;
+
+		width: min(var(--width), 100% - var(--padding) * 2);
+		margin-inline: auto
+	}
+
+	.flow > * + * {
+		margin-top: var(--flow-space, 1.7rem)
+	}
+
+	.button,
+	.button-secondary {
+		border: 2px solid var(--accent);
+		background-color: var(--accent);
+		padding: .7rem 1.2rem;
+		border-radius: 5px;
+		color: var(--white);
+		font-size: .82rem;
+		font-weight: 500;
+		transition: background-color .12s ease, color .12s ease, border .12s ease;
+		box-shadow: 0px 5px 8px rgba(0, 0, 0, .1);
+
+		&:hover {
+			background-color: var(--white);
+			color: var(--accent)
+		}
+	}
+
+	.button-secondary {
+		background-color: #f6f6f6;
+		color: #56585d;
+		border: 2px solid #f6f6f6;
+
+		&:hover {
+			background-color: var(--white);
+			border: 2px solid #56585d;
+			color: #56585d
+		}
+	}
+</style>

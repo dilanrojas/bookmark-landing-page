@@ -1,0 +1,80 @@
+---
+import Logo from "@/assets/Logo.astro"
+import FacebookIcon from "@/assets/FacebooIcon.astro"
+import TwitterIcon from "@/assets/TwitterIcon.astro"
+---
+
+<footer class="pm-footer">
+  <div class="pm-footer-wrapper wrapper">
+    <nav class="pm-footer-nav">
+      <ul class="pm-footer-nav-list">
+        <li>
+          <picture class="logo-picture">
+            <Logo />
+          </picture>
+        </li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="social-nav">
+      <ul class="social-nav-list">
+        <li><a href="#"><FacebookIcon /></a></li>
+        <li><a href="#"><TwitterIcon /></a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .pm-footer {
+    background-color: var(--vd-blue);
+    padding-block: 1.3rem
+  }
+
+  .pm-footer-wrapper {
+    display: flex;
+    align-items: center;
+    color: var(--white)
+  }
+
+  .logo-picture {
+    --accent: var(--s-blue)
+  }
+
+  .social-nav-list,
+  .pm-footer-nav-list {
+    --accent: var(--s-red);
+
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    font-size: .7rem;
+
+    & a:hover { color: var(--accent) }
+  }
+
+  .social-nav {
+    margin-left: auto;
+  }
+
+  @media (width <= 768px) {
+    .pm-footer-wrapper {
+      flex-direction: column;
+      gap: 2rem;
+      padding-block: 1.5rem;
+    }
+
+    .social-nav {
+      margin: 0;
+    }
+  }
+
+  @media (width <= 528px) {
+    .pm-footer-nav-list {
+      flex-direction: column;
+      font-size: 1rem
+    }
+  }
+</style>

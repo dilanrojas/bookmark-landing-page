@@ -1,0 +1,195 @@
+---
+import data from "@/lib/featuresData.json" with { type: "json" }
+
+import Feature from "@/components/Feature.astro"
+---
+
+<section class="features wrapper">
+  <header class="features-header">
+    <h2>Features</h2>
+    <p>
+      Our aim is to make it quick and easy for you to access your favourite websites. 
+      Your bookmarks sync between your devices so you can access them on the go.
+    </p>
+  </header>
+  <nav class="features-nav">
+    <ul class="features-nav-list">
+      <li><span class="feature-selector selector-active" aria-colindex="1">Simple Bookmarking</span></li>
+      <li><span class="feature-selector" aria-colindex="2">Speedy Searching</span></li>
+      <li><span class="feature-selector" aria-colindex="3">Easy Sharing</span></li>
+    </ul>
+  </nav>
+  <div class="features-tabs">
+    {data && data.map(({ id, image, title, description }) => (
+      <Feature
+      id={id}
+      imageSrc={image.src}
+      imageWidth={image.width}
+      imageHeight={image.height}
+      title={title}
+      description={description}
+      isActive={id === 1}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .features {
+    padding-top: 1rem;
+    padding-bottom: 6rem;
+    position: relative;
+    height: 944px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      min-width: 100dvh;
+      height: 358px;
+      bottom: 16%;
+      right: 65%;
+      z-index: -1;
+      background-color: var(--s-blue);
+      border-radius: 0px 150px 150px 0px
+    }
+  }
+
+  .features:has(.showing),
+  .features:has(.hiding) {
+    pointer-events: none;
+  }
+
+  .features-header {
+    text-align: center;
+    max-width: 47ch;
+    margin-inline: auto;
+    margin-bottom: 2.5rem;
+  }
+
+  .features-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .features-nav {
+    margin-inline: auto;
+    margin-bottom: 4rem;
+    width: 100%;
+  }
+
+  .features-nav-list {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .features-nav-list span {
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    padding: 1.2rem 2.5rem;
+    color: #686a6f;
+    transition: border .12s ease, color .12s ease;
+    border-bottom: 1px solid #dfe0e9;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: 0;
+      height: 4px;
+      width: 0%;
+      background-color: var(--s-red);
+      transition: width .12s ease
+    }
+
+    &:hover { color: var(--s-red) }
+  }
+
+  .features-nav-list span.selector-active {
+    color: var(--vd-blue);
+    pointer-events: none;
+
+    &::before {
+      width: 100%;
+    }
+  }
+
+  @media (width <= 828px) {
+    .features::before {
+      height: 250px;
+      bottom: 22%;
+      right: 61%;
+    }
+  }
+
+  @media (width <= 768px) {
+    .features {
+      height: 1130px;
+      padding-block: 5rem;
+    }
+
+    .features::before {
+      height: 250px;
+      bottom: 25%;
+      right: 40%;
+    }
+
+    .features-nav {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .features-nav-list {
+      flex-direction: column;
+      max-width: 100%;
+    }
+
+    .features-nav-list span.selector-active::before {
+      width: 36%
+    }
+  }
+
+  @media (width <= 480px) {
+    .features::before {
+      height: 200px;
+      right: 28%;
+    }
+  }
+</style>
+
+<script>
+  const selectors = document.querySelectorAll<HTMLElement>('.feature-selector')
+
+  function changeActiveSelector(selector: HTMLElement) {
+    document.querySelector('.selector-active')?.classList.remove('selector-active')
+    selector.classList.add('selector-active')
+  }
+
+  function changeActiveFeature(selector: HTMLElement) {
+    let currentFeature = document.querySelector<HTMLElement>('.features-tabs .active')
+    let nextFeature = document.getElementById(`${selector.ariaColIndex}`)
+
+    currentFeature?.classList.add('hiding')
+    currentFeature?.addEventListener('animationend', () => {
+      currentFeature?.classList.remove('active')
+      currentFeature?.classList.remove('hiding')
+      nextFeature?.classList.add('active')
+      nextFeature?.classList.add('showing')
+      nextFeature?.addEventListener('animationend', () => {
+        nextFeature?.classList.remove('showing')
+      }, {once: true})
+    }, {once: true})
+  }
+
+  selectors.forEach(selector => {
+    selector.addEventListener('click', () => {
+
+      changeActiveSelector(selector)
+      changeActiveFeature(selector)
+    })
+  })
+</script>

@@ -1,0 +1,122 @@
+---
+interface Props {
+  id: number
+  imageSrc: string
+  imageWidth: number
+  imageHeight: number
+  title: string
+  description: string
+  isActive: boolean
+}
+
+const { id, imageSrc, imageWidth, imageHeight, title, description, isActive } = Astro.props
+---
+
+<article
+  class={`feature-tab ${isActive ? 'active' : ''}`}
+  id={`${id}`}
+>
+  <picture class="feature-picture">
+    <img
+      src={imageSrc}
+      width={imageWidth}
+      height={imageHeight}
+      alt={`Example of ${title}`}
+    >
+  </picture>
+  <div class="feature-content flow">
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <button class="button more-info-btn">More Info</button>
+  </div>
+</article>
+
+<style>
+  .feature-tab { display: none }
+
+  .feature-tab.active { display: grid }
+
+  .feature-tab {
+    gap: 3rem;
+    grid-template-columns: 600px 1fr;
+    align-items: center;
+  }
+
+  .feature-picture {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    user-select: none;
+  }
+
+  .feature-content {
+    --accent: var(--s-blue);
+
+    max-width: 38ch
+  }
+
+  .feature-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .feature-tab.hiding {
+    & .feature-picture { animation: slideOut .2s forwards }
+    & .feature-content { animation: fadeOut .2s forwards  }
+  }
+
+  .feature-tab.showing {
+    & .feature-picture { animation: slideIn .2s forwards }
+    & .feature-content { animation: fadeIn .2s forwards  }
+  }
+
+  @media (width <= 1028px) {
+    .feature-tab {
+      gap: 3rem;
+      grid-template-columns: 450px 1fr;
+    }
+
+    .feature-picture {
+      width: 100%;
+      display: flex;
+    }
+
+    .feature-picture img {
+      width: 100%;
+      padding-top: 4rem;
+      height: fit-content;
+    }
+  }
+
+  @media (width <= 828px) {
+    .feature-tab {
+      grid-template-columns: 390px 1fr;
+    }
+
+    .feature-picture img {
+      padding-top: 3rem
+    }
+  }
+
+  @media (width <= 768px) {
+    .feature-tab {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .feature-picture {
+      align-items: center;
+      justify-content: center;
+      height: 320px;
+      margin-bottom: 2rem;
+    }
+
+    .feature-picture img {
+      padding: 0;
+      width: min(400px, 100%);
+    }
+
+    .feature-content {
+      margin-inline: auto
+    }
+  }
+</style>

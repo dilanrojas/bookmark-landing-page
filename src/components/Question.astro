@@ -1,0 +1,73 @@
+---
+interface Props {
+  question: string
+  answer: string
+}
+
+const { question, answer } = Astro.props
+---
+
+<details class="question" name="faq">
+  <summary>
+    <h3>{question}</h3>
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12"><path fill="none" stroke="currentColor" stroke-width="3" d="M1 1l8 8 8-8"/></svg>
+    </span>
+  </summary>
+  <p>
+    {answer}
+  </p>
+</details>
+
+<style>
+  .question {
+    user-select: none;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid #DDDDDD;
+
+    @media (prefers-reduced-motion: no-preference) {
+      interpolate-size: allow-keywords;
+    }
+
+    &::details-content {
+      opacity: 0;
+      block-size: 0;
+      overflow-y: clip;
+      transition: content-visibility .13s allow-discrete, opacity .13s, block-size .13s;
+    }
+
+    &[open]::details-content {
+      opacity: 1;
+      block-size: auto;
+    }
+  }
+
+  .question summary {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    padding-top: 1.6rem;
+    padding-bottom: .8rem;
+    justify-content: space-between;
+  }
+
+  .question summary:hover h3 {
+    color: var(--s-red)
+  }
+
+  .question summary h3 {
+    font-weight: 400;
+    font-size: 1rem;
+    transition: color .12s ease;
+  }
+
+  .question span {
+    color: #5267DF;
+    transition: transform .12s ease, color .12s ease
+  }
+
+  .question[open] span {
+    transform: rotate(180deg);
+    color: var(--s-red)
+  }
+</style>

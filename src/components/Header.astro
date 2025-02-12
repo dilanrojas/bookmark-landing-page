@@ -1,0 +1,181 @@
+---
+import Logo from "@/assets/Logo.astro"
+
+import FacebookIcon from "@/assets/FacebooIcon.astro"
+import TwitterIcon from "@/assets/TwitterIcon.astro"
+---
+
+<header class="pm-header">
+  <div class="pm-header-wrapper wrapper">
+    <picture class="logo-picture">
+      <Logo />
+    </picture>
+    <nav class="pm-nav">
+      <ul class="pm-nav-list">
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><button class="button login-btn"><a href="#">Login</a></button></li>
+      </ul>
+      <button class="pm-nav-mobile-btn">
+        <span class="icon-open">
+          <img src="/icon-hamburger.svg" alt="Open mobile menu">
+        </span>
+        <span class="icon-close">
+          <img src="/icon-close.svg" alt="Open mobile menu">
+        </span>
+      </button>
+      <ul class="social-nav-list">
+        <li><a href="#"><FacebookIcon /></a></li>
+        <li><a href="#"><TwitterIcon /></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .pm-header-wrapper {
+    height: 151px;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .pm-nav {
+    display: flex;
+  }
+
+  .pm-nav-list {
+    --accent: var(--s-red);
+
+    display: flex;
+    gap: 2.75rem;
+    align-items: center;
+    font-size: .7rem;
+  }
+
+  .login-btn {
+    padding: .7rem 1.8rem;
+    font-size: inherit;
+  }
+
+  .pm-nav-mobile-btn {
+    display: none;
+    z-index: 90
+  }
+
+  .icon-close { display: none }
+
+  .logo-picture {
+    z-index: 90;
+  }
+
+  .social-nav-list {
+    display: none;
+    gap: 1.5rem;
+    justify-content: center;
+    position: fixed;
+    bottom: 5%;
+    z-index: 90;
+    color: var(--white);
+    left: 0;
+    width: 100%;
+  }
+
+  .social-nav-list a:hover {
+    color: var(--s-red)
+  }
+
+  @media (width <= 768px) {
+    .pm-header-wrapper {
+      height: 120px;
+    }
+
+    .pm-header-wrapper:has(.show) {
+      color: var(--white);
+      --accent: var(--white);
+      --secondary: hsla(229, 31%, 21%, 0.846);
+    }
+
+    .pm-nav-list.show {
+      display: flex;
+
+      opacity: 1;
+      transition: opacity .12s ease-in-out;
+      @starting-style { opacity: 0 }
+    }
+
+    .pm-nav-mobile-btn { display: flex }
+
+    .pm-nav-list.show ~ button {
+      & .icon-open { display: none }
+      & .icon-close { display: block }
+    }
+
+    .pm-nav-list.show ~ .social-nav-list { display: flex }
+
+    .pm-nav-list {
+      color: var(--white);
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding-top: 115px;
+      z-index: 40;
+      height: 100dvh;
+      width: 100%;
+      gap: 0rem;
+      background-color: hsla(229, 31%, 21%, 0.955);
+
+      opacity: 0;
+      transition: opacity .12s ease-in-out, display .12s ease-in-out allow-discrete;
+    }
+
+    .pm-nav-list li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 87%;
+      text-align: center;
+    }
+
+    .pm-nav-list a {
+      border-top: 1px solid #4B526B;
+      padding-block: 1.1rem;
+      font-size: 1rem;
+      width: 100%;
+      letter-spacing: 2px;
+    }
+
+    .pm-nav-list li:nth-child(3) a {
+      border-bottom: 1px solid #4B526B;;
+      margin-bottom: 1.5rem;
+    }
+
+    .pm-nav-list button {
+      width: 100%;
+      background-color: transparent;
+      border: 2px solid var(--white);
+
+      & a {
+        border-top: none;
+      }
+    }
+  }
+</style>
+
+<script>
+  const iconOpen = document.querySelector('.icon-open') as HTMLSpanElement
+  const iconClose = document.querySelector('.icon-close') as HTMLSpanElement
+  const nav = document.querySelector('.pm-nav-list') as HTMLElement
+
+  iconOpen.addEventListener('click', () => {
+    nav.classList.add('show')
+  })
+
+  iconClose.addEventListener('click', () => {
+    nav.classList.remove('show')
+  })
+</script>
