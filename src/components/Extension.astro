@@ -28,7 +28,8 @@ import AddTo from "@/components/AddTo.astro"
 
 <style>
   .extension {
-    padding-block: 7rem;
+    padding-top: 1rem;
+    padding-bottom: 7rem;
   }
 
   .extension-header {
@@ -58,9 +59,15 @@ import AddTo from "@/components/AddTo.astro"
     }
   }
 
-  @media (width <= 480px) {
+  @media (width <= 768px) {
     .extension {
-      padding-top: 10rem
+      padding-top: 9rem
+    }
+  }
+
+  @media (width <= 500px) {
+    .extension {
+      padding-top: 13rem
     }
   }
 </style>
