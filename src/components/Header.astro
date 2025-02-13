@@ -173,9 +173,11 @@ import TwitterIcon from "@/assets/TwitterIcon.astro"
 
   iconOpen.addEventListener('click', () => {
     nav.classList.add('show')
+    nav.classList.add('no-scroll')
   })
 
   iconClose.addEventListener('click', () => {
     nav.classList.remove('show')
+    nav.classList.remove('no-scroll')
   })
 </script>

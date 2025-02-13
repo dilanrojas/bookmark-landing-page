@@ -67,6 +67,11 @@ import Footer from "@/components/Footer.astro"
 		font-size: 18px;
 		color: var(--vd-blue);
 		overflow-x: hidden;
+		scrollbar-gutter: stable;
+	}
+
+	html:has(.no-scroll) {
+		overflow-y: hidden;
 	}
 
 	@media (width <= 768px) {

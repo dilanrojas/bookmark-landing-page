@@ -20,14 +20,13 @@
     --accent: var(--s-blue);
 
     display: flex;
-    justify-content: space-between;
     padding-block: 2.8rem;
     margin-bottom: 2rem
   }
 
   .hero-article {
     padding-top: 4rem;
-    max-width: 42ch;
+    min-width: 42ch;
   }
 
   .hero-article h1 {
@@ -58,10 +57,10 @@
   }
 
   .hero-picture img {
-    transform: translateX(95px);
+    transform: translateX(60px);
   }
 
-  @media (width <= 768px) {
+  @media (width <= 938px) {
     .hero {
       flex-direction: column-reverse;
     }
